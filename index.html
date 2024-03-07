@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body,
+      html {
+        height: 100%; /* Ensure full height */
+        margin: 0; /* Remove default margin */
+        display: flex; /* Use flex layout */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center children horizontally */
+      }
+
+      .CodeMirror {
+        resize: both;
+        overflow: auto;
+        border: 2px solid #ccc;
+        width: 800px; /* Set width */
+        height: 600px; /* Set height */
+      }
+
+      .toolbar {
+        text-align: center;
+      }
+
+      select,
+      button {
+        margin: 5px;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  </head>
+  <body>
+    <div class="toolbar">
+      <select id="language-select" onchange="changeLanguage()">
+        <option value="text/x-java">Java</option>
+        <option value="text/x-python">Python</option>
+        <option value="text/javascript">JavaScript</option>
+      </select>
+      <button onclick="loadFile()">Load File</button>
+      <button onclick="generatePDF()">Generate PDF</button>
+      <button onclick="saveFile()">Save as Text</button>
+      <button onclick="increaseFontSize()">Increase Font Size</button>
+      <button onclick="decreaseFontSize()">Decrease Font Size</button>
+    </div>
+
+    <textarea id="java-code"></textarea>
+    <input type="file" id="fileInput" style="display: none" />
+
+    <script>
+      var javaEditor = CodeMirror.fromTextArea(
+        document.getElementById("java-code"),
+        {
+          mode: "text/x-java",
+          lineNumbers: true,
+          theme: "default",
+        }
+      );
+
+      var currentFontSize = 12; // Initial font size
+
+      function changeLanguage() {
+        var language = document.getElementById("language-select").value;
+        javaEditor.setOption("mode", language);
+      }
+
+      function generatePDF() {
+        var doc = new window.jspdf.jsPDF();
+        doc.setFont("courier");
+        doc.setFontSize(currentFontSize);
+        doc.text(javaEditor.getValue(), 10, 10);
+        doc.save("java_code.pdf");
+      }
+
+      function loadFile() {
+        document.getElementById("fileInput").click();
+      }
+
+      function saveFile() {
+        var content = javaEditor.getValue();
+        var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "java_code.txt");
+      }
+
+      function increaseFontSize() {
+        currentFontSize++;
+        javaEditor.getWrapperElement().style.fontSize = currentFontSize + "px";
+        javaEditor.refresh();
+      }
+
+      function decreaseFontSize() {
+        if (currentFontSize > 1) {
+          currentFontSize--;
+          javaEditor.getWrapperElement().style.fontSize =
+            currentFontSize + "px";
+          javaEditor.refresh();
+        }
+      }
+
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (event) {
+          var file = event.target.files[0];
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            javaEditor.setValue(e.target.result);
+          };
+          reader.readAsText(file);
+        });
+    </script>
+  </body>
+</html>
