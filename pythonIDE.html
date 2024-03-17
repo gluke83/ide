@@ -7,13 +7,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css"
     />
 
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/clike/clike.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/python/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="scriptJS.js"></script>
+    <script src="scriptPYTHON.js"></script>
   </head>
   <body>
     <div class="sidenav">
@@ -23,18 +23,15 @@
     </div>
 
     <div class="toolbar">
-      <!-- Toolbar buttons and select here -->
-
       <button onclick="loadFile()">Load File</button>
-      <button onclick="saveFile()">Save as Text</button>
       <button onclick="generatePDF()">Generate PDF</button>
+      <button onclick="saveFile()">Save as Text</button>
       <button onclick="increaseFontSize()">Increase Font Size</button>
       <button onclick="decreaseFontSize()">Decrease Font Size</button>
       <button onclick="runCode()">Run Code</button>
     </div>
 
     <textarea id="user-code"></textarea>
-
     <div id="console" class="console">Console Output</div>
     <input type="file" id="fileInput" style="display: none" />
   </body>

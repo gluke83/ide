@@ -1,0 +1,101 @@
+body,
+html {
+  margin: 0; /* Remove default margin */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Add top margin to push everything down */
+}
+
+.workspace {
+  display: flex; /* Align items vertically in a column */
+  flex-direction: column; /* Stack elements vertically */
+  width: 800px; /* Width for both editor and console */
+  margin-bottom: 20px; /* Add some space at the bottom */
+}
+
+.CodeMirror {
+  width: 100%; /* Take full width of the workspace */
+  border: 2px solid #ccc;
+  resize: both;
+  overflow: auto;
+}
+
+.CodeMirror {
+  height: 600px; /* Height for editor */
+}
+
+.toolbar {
+  text-align: center;
+  margin-top: 10px; /* Add some space at the top */
+}
+
+button {
+  margin: 5px;
+  border: 2px solid #333;
+  font-family: monospace;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background-color: #b6b6b6; /* Light gray background on hover */
+  color: #070707; /* Optional: change text color on hover */
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px; /* Adjust width as needed */
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f8f9fa; /* Light background */
+  overflow-x: hidden;
+  padding-top: 20px;
+  box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.sidenav a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #495057;
+  display: block;
+  transition: all 0.3s ease;
+  border-radius: 5px; /* Rounded corners */
+}
+
+.sidenav a:hover {
+  color: #070707;
+  background-color: #b6b6b6; /* Light gray background on hover */
+}
+
+.CodeMirror,
+.console {
+  width: 100%; /* Take full width of the workspace */
+  border: 2px solid #ccc;
+  resize: both;
+  overflow: auto;
+}
+
+.CodeMirror {
+  height: 600px; /* Height for editor */
+}
+
+.console {
+  height: 200px; /* Height for console */
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  font-family: monospace;
+  overflow-y: auto;
+}
